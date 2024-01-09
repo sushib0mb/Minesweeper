@@ -10,11 +10,13 @@ package minesweeper;
  */
 public class Minesweeper {
 
+    static GameFrame gameFrame;
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new Board().setVisible(true);
+        gameFrame = new GameFrame();
     }
-    
+
 }

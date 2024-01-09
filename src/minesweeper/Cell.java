@@ -10,7 +10,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,18 +33,10 @@ public class Cell extends javax.swing.JPanel {
                 if (edited == false) {
                     if (e.getModifiers() == MouseEvent.BUTTON1_MASK && e.getClickCount() == 1) {
                         if (hasBomb == true) {
-                            button.setBackground(Color.RED);
-                            String[] buttons = {"Quit"};
-
-                            int option = JOptionPane.showOptionDialog(null, "You had " + " bombs left", "You lost!",
-                                    JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
-
-                            if(option == 0){
-                                System.exit(0);
-                            }
+                            Minesweeper.gameFrame.endGame();
                         } else {
                             button.setBackground(Color.WHITE);
-                            if(adjacent != 0){
+                            if (adjacent != 0) {
                                 button.setLabel(Integer.toString(adjacent));
                             }
                         }
@@ -55,6 +46,7 @@ public class Cell extends javax.swing.JPanel {
                         try {
                             Image img = ImageIO.read(getClass().getResource("flag.png"));
                             button.setIcon(new ImageIcon(img));
+                            Board.updateBomb(hasBomb);
                         } catch (Exception ex) {
                             System.out.println(ex);
                         }

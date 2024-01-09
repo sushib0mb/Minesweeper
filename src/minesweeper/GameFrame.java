@@ -4,17 +4,36 @@
  */
 package minesweeper;
 
+import java.awt.Color;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Taizo
  */
-public class Scoring extends javax.swing.JPanel {
+public class GameFrame extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Scoring
-     */
-    public Scoring() {
+    static Board board;
+
+    public GameFrame() {
         initComponents();
+        board = new Board();
+        board.setVisible(true);
+    }
+
+    public void endGame() {
+        String[] buttons = {"Restart", "Quit"};
+
+        int option = JOptionPane.showOptionDialog(null, "You had " + Board.getBombsLeft() + " bombs left", "You lost!",
+                JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
+        if (option == 0) {
+            this.remove(board);
+            board.setVisible(false);
+            board = new Board();
+            board.setVisible(true);
+        } else if (option == 1) {
+            System.exit(0);
+        }
     }
 
     /**
